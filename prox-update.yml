@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+  strategy: free
+  #become: yes
+  #pipelining: true
+  tasks:
+    - ansible.builtin.apt:
+        name: tailscale
+        state: latest
+        update_cache: yes
