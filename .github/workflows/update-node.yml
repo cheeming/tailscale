@@ -17,3 +17,7 @@ jobs:
     steps:
     - name: echo host
       run: echo "${{ inputs.host }}"
+    - name: check dir
+      run: ls -lth
+    - name: chekc pwd
+      run: pwd
