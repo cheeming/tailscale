@@ -1,0 +1,19 @@
+# Trigger this to update a tailscale node
+
+name: Update Node
+
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: 'Server to connect to'
+        default: 'FIXHOST'
+        required: true
+        type: string
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo host
+      run: echo "${{ inputs.host }}"
