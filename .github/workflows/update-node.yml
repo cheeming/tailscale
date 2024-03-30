@@ -12,16 +12,12 @@ on:
         type: string
 
 jobs:
-  echo:
+  update-node:
     runs-on: ubuntu-latest
     steps:
     - name: checkout repo
       uses: actions/checkout@v4
     - name: install python deps
       run: pip install -r requirements.txt
-    - name: echo host
-      run: echo "${{ inputs.host }}"
-    - name: check dir
-      run: ls -lth
-    - name: chekc pwd
-      run: pwd
+    - name: update host
+      run: HOST="${{ inputs.host }}," make update
