@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       HOST: "${{ inputs.host }},"
-      IDENTITY_FILE_CONTENTS: "${{ inputs.identity }},"
+      IDENTITY: "${{ inputs.identity }}"
     steps:
     - name: checkout repo
       uses: actions/checkout@v4
