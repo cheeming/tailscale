@@ -7,17 +7,23 @@ on:
     inputs:
       host:
         description: 'Server to connect to'
-        default: 'FIXHOST'
+        required: true
+        type: string
+      identity:
+        description: 'Identity file contents'
         required: true
         type: string
 
 jobs:
   update-node:
     runs-on: ubuntu-latest
+    env: 
+      HOST: "${{ inputs.host }},"
+      IDENTITY_FILE_CONTENTS: "${{ inputs.identity }},"
     steps:
     - name: checkout repo
       uses: actions/checkout@v4
     - name: install python deps
       run: pip install -r requirements.txt
     - name: update host
-      run: HOST="${{ inputs.host }}," make update
+      run: make update
