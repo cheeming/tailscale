@@ -17,6 +17,8 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@v4
+    - name: install python deps
+      run: pip install -r requirements.txt
     - name: echo host
       run: echo "${{ inputs.host }}"
     - name: check dir
