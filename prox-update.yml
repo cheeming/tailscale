@@ -9,3 +9,4 @@
         name: tailscale
         state: latest
         update_cache: yes
+    - ansible.builtin.shell: /usr/bin/tailscale set --auto-update
