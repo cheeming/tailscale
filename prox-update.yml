@@ -9,4 +9,10 @@
         name: tailscale
         state: latest
         update_cache: yes
-    - ansible.builtin.shell: /usr/bin/tailscale set --auto-update
+    - ansible.builtin.copy:
+        src: files/50-tailscale
+        dest: /etc/networkd-dispatcher/routable.d/50-tailscale
+        mode: '0755'
+    - ansible.builtin.shell: /etc/networkd-dispatcher/routable.d/50-tailscale
+
+    - ansible.builtin.shell: /usr/bin/tailscale set --auto-update --advertise-exit-node
