@@ -20,7 +20,5 @@
         dest: /etc/networkd-dispatcher/routable.d/50-tailscale
         mode: '0755'
     - ansible.builtin.shell: /etc/networkd-dispatcher/routable.d/50-tailscale
-
     - ansible.builtin.shell: /usr/bin/tailscale set --auto-update
-    - ansible.builtin.shell: /usr/bin/tailscale set --advertise-exit-node
-    - ansible.builtin.shell: /usr/bin/tailscale up --auth-key {{ auth_key }}
+    - ansible.builtin.shell: /usr/bin/tailscale up --auth-key {{ auth_key }} --advertise-exit-node
