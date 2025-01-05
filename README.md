@@ -11,7 +11,6 @@ Adding New Server
  - Get public IP address
  - Add into ~/.ssh/config (NOTE: Maybe need to make a ssh config just for ansible)
  - TODOs
-   - Change machine name (tailscale up --hostname=<name>)
    - Exit node
    - Disable key expiry
 
