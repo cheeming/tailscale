@@ -6,6 +6,12 @@ Dependencies
 ------------
 Python v3.11, check requirements.txt
 
+Setup New Server
+----------------
+```
+$ HOST=awsuseast1 make setup
+```
+
 Adding New Server
 -----------------
  - Get public IP address
@@ -17,4 +23,4 @@ Adding New Server
 Tips
 ----
  - Use this to debug network issues https://tailscale.com/kb/1411/device-connectivity and https://tailscale.com/kb/1257/connection-types
- - To edit the secrets.enc file, please use ansible-vault command
+ - To edit the secrets.enc file, please use `ansible-vault` command

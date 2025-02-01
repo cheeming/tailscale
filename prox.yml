@@ -9,6 +9,9 @@
         pkg:
         - tailscale
         - iperf3
+        - python3
+        - python3-venv
+        - git
         state: latest
         update_cache: yes
         lock_timeout: 120
