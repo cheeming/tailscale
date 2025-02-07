@@ -1,0 +1,1 @@
+/home/ubuntu/shadowsocks2-linux-arm64 -s 'ss://AEAD_CHACHA20_POLY1305:REPLACE_YOUR_PASSWORD_HERE@:8488' -verbose -plugin /home/ubuntu/v2ray-plugin_linux_arm64 -plugin-opts "server" > /home/ubuntu/ss.log 2>&1
