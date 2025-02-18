@@ -4,7 +4,7 @@ Just some scripts to help setup tailscale nodes
 
 Dependencies
 ------------
-Python v3.11, check requirements.txt
+Python v3.11, check requirements.txt, install into `venv/` folder
 
 Setup New Server
 ----------------
