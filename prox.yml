@@ -29,28 +29,20 @@
         src: files/shadowsocks2-linux-arm64
         dest: /home/ubuntu
         mode: '0755'
-      become: true
-      become_user: ubuntu
     # v2ray plugin
     - ansible.builtin.copy:
         src: files/v2ray-plugin_linux_arm64
         dest: /home/ubuntu
         mode: '0755'
-      become: true
-      become_user: ubuntu
     # v2ray plugin
     - ansible.builtin.copy:
         src: files/start-ss
         dest: /home/ubuntu
         mode: '0755'
-      become: true
-      become_user: ubuntu
     # setup crontab to run shadowsocks on reboot
     - ansible.builtin.cron:
         name: "start shadowsocks"
         special_time: "reboot"
         job: "/home/ubuntu/start-ss &"
-      become: true
-      become_user: ubuntu
     # reboot machine to test
     - ansible.builtin.reboot:
