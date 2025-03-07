@@ -5,11 +5,16 @@
   tasks:
     # tailscale
     - ansible.builtin.shell: ls /usr/share/keyrings/tailscale-archive-keyring.gpg || ( curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null )
+      register: result_ts_keyring
+      changed_when: ("/usr/share/keyrings/tailscale-archive-keyring.gpg" not in result_ts_keyring.stdout)
     - ansible.builtin.shell: ls /etc/apt/sources.list.d/tailscale.list || ( curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list )
+      register: result_ts_sources
+      changed_when: ("/etc/apt/sources.list.d/tailscale.list" not in result_ts_sources.stdout)
     - ansible.builtin.apt:
         pkg:
         - tailscale
         - iperf3
+        - docker.io
         state: latest
         update_cache: yes
         lock_timeout: 120
@@ -44,5 +49,22 @@
         name: "start shadowsocks"
         special_time: "reboot"
         job: "/home/ubuntu/start-ss &"
+    # update the IP address
+    - ansible.builtin.copy:
+        src: files/noip-duc.env
+        dest: /home/ubuntu
+        mode: '0400'
+      become: true
+      become_user: ubuntu
+    - name: allow ubuntu user to run docker commands
+      ansible.builtin.user:
+        name: ubuntu
+        groups: docker
+        append: true
+    - ansible.builtin.cron:
+        name: "update IP address"
+        special_time: "reboot"
+        job: "docker run --env-file /home/ubuntu/noip-duc.env ghcr.io/noipcom/noip-duc:latest --once -v > /home/ubuntu/noip-duc.log 2>&1"
+      become_user: ubuntu
     # reboot machine to test
     - ansible.builtin.reboot:
