@@ -12,6 +12,10 @@
       changed_when: ("/etc/apt/sources.list.d/tailscale.list" not in result_ts_sources.stdout)
     - ansible.builtin.apt:
         pkg:
+        - snapd
+        state: absent
+    - ansible.builtin.apt:
+        pkg:
         - tailscale
         - iperf3
         - docker.io
@@ -39,26 +43,32 @@
     - ansible.builtin.shell: /usr/bin/tailscale set --auto-update
     - ansible.builtin.shell: /usr/bin/tailscale up --auth-key {{ auth_key }} --advertise-exit-node --hostname={{ machine_name }}
 
-    # shadowsocks2
+    # shadowsocks2 & v2ray plugin
     - ansible.builtin.copy:
         src: files/shadowsocks2-linux-arm64
         dest: /home/ubuntu
         mode: '0755'
-    # v2ray plugin
+      become: true
+      become_user: ubuntu
     - ansible.builtin.copy:
         src: files/v2ray-plugin_linux_arm64
         dest: /home/ubuntu
         mode: '0755'
-    # v2ray plugin
+      become: true
+      become_user: ubuntu
     - ansible.builtin.copy:
         src: files/start-ss
         dest: /home/ubuntu
         mode: '0755'
+      become: true
+      become_user: ubuntu
     # setup crontab to run shadowsocks on reboot
     - ansible.builtin.cron:
         name: "start shadowsocks"
         special_time: "reboot"
         job: "/home/ubuntu/start-ss &"
+      become: true
+      become_user: ubuntu
     # update the IP address
     - ansible.builtin.copy:
         src: files/noip-duc.env
@@ -75,6 +85,7 @@
         name: "update IP address"
         special_time: "reboot"
         job: "docker run --env-file /home/ubuntu/noip-duc.env ghcr.io/noipcom/noip-duc:latest --once -v > /home/ubuntu/noip-duc.log 2>&1"
+      become: true
       become_user: ubuntu
     # reboot machine to test
     - ansible.builtin.reboot:
