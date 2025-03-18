@@ -18,8 +18,18 @@
         state: latest
         update_cache: yes
         lock_timeout: 120
-    - ansible.builtin.shell: grep '^net.ipv4.ip_forward = 1' /etc/sysctl.conf || ( echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.conf )
-    - ansible.builtin.shell: grep '^net.ipv6.conf.all.forwarding = 1' /etc/sysctl.conf || ( echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.conf )
+    - ansible.builtin.lineinfile:
+        path: /etc/security/limits.conf
+        regexp: '^ubuntu soft nofile '
+        line: ubuntu soft nofile 51200
+    - ansible.builtin.lineinfile:
+        path: /etc/security/limits.conf
+        regexp: '^ubuntu hard nofile '
+        line: ubuntu hard nofile 51200
+    - ansible.builtin.copy:
+        src: files/sysctl.conf
+        dest: /etc/sysctl.conf
+        mode: '0644'
     - ansible.builtin.shell: sysctl -p /etc/sysctl.conf
     - ansible.builtin.copy:
         src: files/50-tailscale

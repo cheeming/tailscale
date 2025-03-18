@@ -11,6 +11,6 @@ v2ray-plugin
 
 To start a corresponding shadowsocks client:
 ```
-./shadowsocks2 -c 'ss://AEAD_CHACHA20_POLY1305:${PASSWORD}@${HOSTNAME}:8488' -verbose -socks :1080 -u -plugin ./v2ray-plugin
+nohup ./start-ss &
 ```
 On some clients the encryption might be listed as: chacha20-ietf-poly1305
