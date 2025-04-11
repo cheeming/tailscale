@@ -15,10 +15,8 @@ $ HOST=awsuseast1 make setup
 Adding New Server
 -----------------
  - Get public IP address
- - Add into ~/.ssh/config (NOTE: Maybe need to make a ssh config just for ansible)
- - TODOs
-   - Exit node
-   - Disable key expiry
+ - Add into ~/.ssh/config (NOTE: Maybe need to make a ssh config just for ansible?)
+ - Disable key expiry in Tailscale portal
 
 Tips
 ----
