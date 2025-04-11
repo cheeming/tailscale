@@ -1,0 +1,6 @@
+get_all_instance_state:
+  stage: deploy
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/amazon/aws-cli:2.23.6
+  script:
+    - ./scripts/get_all_instance_state.sh
+  when: manual
