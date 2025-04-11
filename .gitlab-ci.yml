@@ -6,3 +6,34 @@ get_all_instance_state:
   script:
     - ./scripts/get_all_instance_state.sh
   when: manual
+
+modify_instance_state:
+  stage: deploy
+  variables:
+    COMMAND:
+      value: "start"
+      options:
+        - "start"
+        - "stop"
+    REGION:
+      value: "ap-northeast-1"
+      options:
+        - "us-east-1"
+        - "ap-northeast-1"
+        - "ap-east-1"
+        - "ap-southeast-1"
+        - "ap-southeast-5"
+    INSTANCE_ID:
+      value: "i-08a290ac69266a6df"
+      options:
+        - "i-0ff77e68dc97d8829"
+        - "i-08a290ac69266a6df"
+        - "i-0608616f18aef11fb"
+        - "i-09372062775473aa4"
+        - "i-0a18c4f3341119a98"
+  image:
+    name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/amazon/aws-cli:2.23.6
+    entrypoint: [""]
+  script:
+    - ./scripts/modify_instance_state.sh ${COMMAND} ${REGION} ${INSTANCE_ID}
+  when: manual
