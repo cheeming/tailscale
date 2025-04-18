@@ -91,6 +91,7 @@
     - ansible.builtin.cron:
         name: "shutdown server"
         hour: "14"
+        minute: "0"
         job: "shutdown -h now"
     # reboot machine to test
     - ansible.builtin.reboot:
