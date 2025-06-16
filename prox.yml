@@ -114,5 +114,16 @@
         hour: "16"
         minute: "0"
         job: "shutdown -h now"
+    - name: copy ghostty xterm config
+      ansible.builtin.copy:
+        src: files/xterm-ghostty-tic.txt
+        dest: /home/ubuntu
+        mode: '0400'
+      become: true
+      become_user: ubuntu
+    - name: import ghostty xterm config
+      ansible.builtin.shell: tic -x xterm-ghostty-tic.txt
+      become: true
+      become_user: ubuntu
     - name: reboot machine to test startup
       ansible.builtin.reboot:
