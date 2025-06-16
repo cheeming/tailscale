@@ -4,22 +4,17 @@ variables:
     options:
       - "start"
       - "stop"
+      - "reboot"
   REGION:
     value: "ap-northeast-1"
     options:
       - "us-east-1"
       - "ap-northeast-1"
-      - "ap-east-1"
-      - "ap-southeast-1"
-      - "ap-southeast-5"
   INSTANCE_ID:
     value: "i-08a290ac69266a6df"
     options:
-      - "i-0ff77e68dc97d8829"
+      - "i-0d7a45ab3ebd1c02d"
       - "i-08a290ac69266a6df"
-      - "i-0608616f18aef11fb"
-      - "i-09372062775473aa4"
-      - "i-0a18c4f3341119a98"
 
 get_all_instance_state:
   stage: deploy
@@ -37,4 +32,7 @@ modify_instance_state:
     entrypoint: [""]
   script:
     - ./scripts/modify_instance_state.sh ${COMMAND} ${REGION} ${INSTANCE_ID}
-  when: manual
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+    - if: $CI_PIPELINE_SOURCE == "schedule"
