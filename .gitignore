@@ -2,3 +2,6 @@
 venv
 secrets.enc
 files/noip-duc.env
+
+.gitlab-ci-local
+.gitlab-ci-local.env

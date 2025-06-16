@@ -102,10 +102,16 @@
         job: "docker run --env-file /home/ubuntu/noip-duc.env ghcr.io/noipcom/noip-duc:latest --once -v > /home/ubuntu/noip-duc.log 2>&1"
       become: true
       become_user: ubuntu
-    - name: add cron to shutdown server at 10pm UCT+0800
+    - name: add cron to shutdown server at 10pm UTC+0800
       ansible.builtin.cron:
         name: "shutdown server"
         hour: "14"
+        minute: "0"
+        job: "shutdown -h now"
+    - name: add cron to shutdown server at 12pm UTC+1000
+      ansible.builtin.cron:
+        name: "shutdown server2"
+        hour: "16"
         minute: "0"
         job: "shutdown -h now"
     - name: reboot machine to test startup

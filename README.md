@@ -22,3 +22,7 @@ Tips
 ----
  - Use this to debug network issues https://tailscale.com/kb/1411/device-connectivity and https://tailscale.com/kb/1257/connection-types
  - To edit the secrets.enc file, please use `ansible-vault` command
+
+Gitlab
+------
+You can use `gitlab-ci-local` to test Gitlab pipelines and jobs
