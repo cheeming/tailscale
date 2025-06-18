@@ -26,3 +26,11 @@ Tips
 Gitlab
 ------
 You can use `gitlab-ci-local` to test Gitlab pipelines and jobs
+
+Shadowsocks
+-----------
+If you want TLS support for Shadowsocks, we need to generate a cert for the relevant domain.
+
+```
+~/.acme.sh/acme.sh --issue --dns dns_aws -d <DOMAIN_NAME> --log --server letsencrypt
+```

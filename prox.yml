@@ -108,6 +108,15 @@
       become_user: ubuntu
       tags:
         - shadowsocks
+    - name: copy tmpsc.net cert and key files
+      ansible.builtin.copy:
+        src: files/tmpsc.net/
+        dest: /home/ubuntu/tmpsc.net/
+        mode: '0400'
+      become: true
+      become_user: ubuntu
+      tags:
+        - shadowsocks
     - name: setup cron to start shadowsocks server on reboot
       ansible.builtin.cron:
         name: "start shadowsocks"

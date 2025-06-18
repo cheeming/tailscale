@@ -1,7 +1,10 @@
 .DS_Store
+*.swp
+
 venv
-secrets.enc
+secrets.var
 files/noip-duc.env
 
 .gitlab-ci-local
 .gitlab-ci-local.env
+
