@@ -1,0 +1,4 @@
+SERVER=${1}
+PASSWORD=${2}
+REMOTE_PORT=${3}
+./shadowsocks2 -c "ss://AEAD_CHACHA20_POLY1305:${PASSWORD}@${SERVER}:8488" -verbose -u -plugin ./v2ray-plugin_linux_amd64 -plugin-opts "tls;host=DOMAIN_NAME;" -tcptun :1${REMOTE_PORT}=localhost:${REMOTE_PORT}
