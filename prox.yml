@@ -122,8 +122,6 @@
         name: "start shadowsocks"
         special_time: "reboot"
         job: "/home/ubuntu/start-ss &"
-      become: true
-      become_user: ubuntu
       tags:
         - shadowsocks
     - name: copy configuration for ddns domain
