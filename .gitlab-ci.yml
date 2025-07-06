@@ -10,11 +10,13 @@ variables:
     options:
       - "us-east-1"
       - "ap-northeast-1"
+      - "ap-southeast-1"
   INSTANCE_ID:
     value: "i-08a290ac69266a6df"
     options:
       - "i-0d7a45ab3ebd1c02d"
       - "i-08a290ac69266a6df"
+      - "i-0434dfb3153453859"
 
 get_all_instance_state:
   stage: deploy
